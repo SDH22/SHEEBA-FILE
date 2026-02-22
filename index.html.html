@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheeba Records · professional case</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-container {
+            max-width: 1600px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.2);
+            overflow: hidden;
+            padding: 2rem 2.2rem;
+        }
+
+        .header-bar {
+            background: linear-gradient(135deg, #1a3650, #2c4c6e);
+            margin: -2rem -2.2rem 1.8rem -2.2rem;
+            padding: 2.2rem 2.5rem;
+            color: white;
+        }
+
+        .header-bar h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+            text-transform: none; /* keep title normal */
+        }
+
+        .header-bar p {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.85;
+            letter-spacing: 0.2px;
+            text-transform: none;
+        }
+
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+            background: #f0f4fa;
+            border-radius: 20px;
+            padding: 1.4rem 1.8rem;
+            border: 1px solid #dde5f0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1rem 1.6rem;
+            flex: 1 1 180px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e2eaf2;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #4a617c;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-value {
+            font-size: 1.9rem;
+            font-weight: 500;
+            color: #0a2a44;
+            line-height: 1.2;
+        }
+
+        .stat-value small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #5a7395;
+            margin-left: 0.3rem;
+        }
+
+        .records-panels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .panel {
+            flex: 1 1 400px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.8rem 2.2rem;
+            box-shadow: 0 12px 24px -12px rgba(26, 54, 80, 0.15);
+            border: 1px solid #eaf0f8;
+        }
+
+        .panel-title {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #1a3650;
+            margin-bottom: 1.8rem;
+            border-bottom: 2px solid #dbe4f0;
+            padding-bottom: 0.7rem;
+            letter-spacing: -0.01em;
+            text-transform: uppercase; /* panel titles uppercase for emphasis */
+        }
+
+        .month-block {
+            margin-bottom: 2.2rem;
+        }
+
+        .month-header {
+            background: #eef3f9;
+            border-radius: 30px;
+            padding: 0.3rem 1.2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1f3b5c;
+            display: inline-block;
+            margin-bottom: 1.2rem;
+            border: 1px solid #d0deef;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .subcategory-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c4c6e;
+            background: #f2f8ff;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            margin: 1.2rem 0 0.8rem 0;
+            display: inline-block;
+            border-left: 4px solid #8ba0bc;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+            gap: 1rem;
+        }
+
+        .thumb-card {
+            background: white;
+            border-radius: 14px;
+            padding: 0.7rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e2eaf2;
+            transition: 0.15s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .thumb-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -8px rgba(45, 80, 120, 0.2);
+            border-color: #b2c9e0;
+        }
+
+        .thumb-image {
+            width: 100%;
+            aspect-ratio: 1 / 1.3;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #f5f9ff;
+            border: 1px solid #d8e3f0;
+        }
+
+        .thumb-caption {
+            margin-top: 0.4rem;
+            font-size: 0.65rem;
+            color: #3e5a7a;
+            font-weight: 500;
+            text-align: center;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-transform: uppercase; /* small uppercase for consistency */
+        }
+
+        .info-bar {
+            background: #eef3f9;
+            border-radius: 18px;
+            padding: 1.2rem 2rem;
+            margin: 1rem 0 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            color: #1f3b5c;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid #d5e2f0;
+        }
+
+        .info-bar strong {
+            background: #1a3650;
+            color: white;
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-left: 0.8rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 95vw;
+            max-height: 95vh;
+        }
+
+        .modal-image-wrapper {
+            overflow: auto;
+            max-width: 100%;
+            max-height: calc(90vh - 70px);
+            border-radius: 16px;
+            background: #0a0a0a;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            cursor: zoom-in;
+        }
+
+        .modal-image {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: none;
+            transform-origin: 0 0;
+            transition: transform 0.1s ease;
+        }
+
+        .zoom-controls {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1.2rem;
+            background: rgba(30, 30, 40, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .zoom-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 400;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.15s;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .zoom-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        .zoom-btn.reset {
+            font-size: 1rem;
+            width: auto;
+            padding: 0 1.2rem;
+            border-radius: 40px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 2.8rem;
+            font-weight: 300;
+            cursor: pointer;
+            background: rgba(0,0,0,0.3);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.05);
+        }
+
+        .footnote {
+            font-size: 0.75rem;
+            color: #5f799b;
+            text-align: right;
+            margin-top: 1rem;
+            border-top: 1px solid #dee9f2;
+            padding-top: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <div class="header-bar">
+        <h1>Sheeba Records</h1>
+        <p>DOCTOR VISITS · PRESCRIPTIONS · TEST REPORTS · LMP 4 AUG 2025 – 36 WEEKS 20 APR 2026</p>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-label">CURRENT DATE</div>
+            <div class="stat-value" id="currentDate">—</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">DAYS UNTIL 36 WEEKS</div>
+            <div class="stat-value" id="daysRemaining">— <small>DAYS</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">GESTATION (LMP)</div>
+            <div class="stat-value" id="currentPregnancy">— <small>WEEKS</small></div>
+        </div>
+    </div>
+
+    <div class="records-panels" id="galleryContainer"></div>
+
+    <div class="info-bar">
+        <span>LMP: <strong>4 AUGUST 2025</strong> — 36 WEEKS: <strong>20 APRIL 2026</strong></span>
+        <span id="weeksRemaining"></span>
+    </div>
+    <div class="footnote">
+        CLICK THUMBNAIL TO ENLARGE · USE ZOOM CONTROLS FOR DETAILS
+    </div>
+</div>
+
+<div id="imageModal" class="modal" onclick="closeModalOnClickOutside(event)">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="modal-container" onclick="event.stopPropagation()">
+        <div class="modal-image-wrapper" id="modalImageWrapper">
+            <img class="modal-image" id="modalImage" alt="Full size report">
+        </div>
+        <div class="zoom-controls">
+            <button class="zoom-btn" id="zoomInBtn">+</button>
+            <button class="zoom-btn" id="zoomOutBtn">−</button>
+            <button class="zoom-btn reset" id="zoomResetBtn">RESET</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ------------------------------------------------------------
+    // UPDATED IMAGE DATA (with the specified link removed)
+    // ------------------------------------------------------------
+    const imageData = [
+        { url: "https://i.postimg.cc/rpgSfJrv/DEC-2024-Follow-up-Clinical-Notes-(Sunray-Health-Point-Dr-Shalini-Sud)-2024.jpg", month: "Dec-24", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/tTTFwxdJ/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0001.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/hjjV6d8D/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0002.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/3RR2VvjY/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0003.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/qRR2S3ct/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0004.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/G25vCmzH/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0005.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/T15gYv4f/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0006.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/nM87XSyH/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0007.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/vDR942Jc/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0008.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/LhdfJQcP/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0009.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/59Dk541N/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0010.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/66F1VWwN/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0011.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/jqBk6xKf/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0012.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/7PjQ1HDf/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0013.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/tR8mdqyF/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0014.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/XNtDKj3w/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0015.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/fTXqBGTX/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0016.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/X7F1QR7L/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0017.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/XYbHhspH/FEB-2026-Clinical-Note-Admission-Order-Dr-Roli-Gautum.jpg", month: "Feb-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/Hs5vBqsM/FEB-2026-Clinical-OPD-Notes-(Holy-Family-Hospital-Dr-Roli-Gautam)-19-Feb-2026.jpg", month: "Feb-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/SN81DBNc/FEB-2026-Clinical-OPD-Notes-(Holy-Family-Hospital)-Feb-2026.jpg", month: "Feb-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/y8HQ5Lkr/FEB-2026-Clinical-Progress-Notes-Dated-19-Feb-2026.jpg", month: "Feb-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/xTHptwTp/FEB-2026-Doctor-Visit-9-Feb-2026.jpg", month: "Feb-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/c4YkXp45/FEB-2026-Doctor-Visit-9-Feb-2026-II.jpg", month: "Feb-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/jSbg9ML8/FEB-2026-Glucose-Postprandial-21-Feb-Tata-1-Mg-page-0001-(1).jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/YCHnVdhs/FEB-2026-Test-Report-01-Feb-2026.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/rwknbfK7/FEB-2026-Test-Report-01-Feb-2026-CBC-Urine-Anlaysis.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/DwTjDxSV/FEB-2026-Test-Urine-Culture-Holy-Family-01-Feb-2026.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/4xgLMWmD/FEB-2026-Urine-Test-01-Feb-2026.jpg", month: "Feb-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/y8yQz0Rn/JAN-2026-Clinical-Progress-Notes-(Dated-31012026).jpg", month: "Jan-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/SxhT5gnp/JAN-2026-Doctor-Visit-26-Week-ANC-5th-Jan-2026.jpg", month: "Jan-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/fRN2F8VQ/JAN-2026-Doctor-Visit-5-Jan-2026.jpg", month: "Jan-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/W1wWP0ZX/JAN-2026-Follow-up-Prescription-(Dated-190126)-Dr-Rolee-Gatum.jpg", month: "Jan-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/vZsqj04T/JAN-2026-NPT-Test-Life-Science-06-Jan-2026-page-0001.jpg", month: "Jan-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/mgyXG79b/JAN-2026-NPT-Test-Life-Science-06-Jan-2026-page-0002.jpg", month: "Jan-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/8zmKVLvv/JAN-2026-NPT-Test-Life-Science-06-Jan-2026-page-0003.jpg", month: "Jan-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/qvxbd2KN/JAN-2026-NPT-Test-Life-Science-06-Jan-2026-page-0004.jpg", month: "Jan-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/SxfTpc9d/JAN-2026-NPT-Test-Life-Science-06-Jan-2026-page-0005.jpg", month: "Jan-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/YS2X2jN6/JAN-2026-Ultrasound-06-01-2026.jpg", month: "Jan-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/VkWGcXtF/JAN-2026-Ultrasound-31-01-2026.jpg", month: "Jan-26", category: "TEST REPORT" },
+        // The following entry has been removed as requested:
+        // { url: "https://i.postimg.cc/Ls4y4hkk/JAN-2026-Ultrasound-Report-(Holy-Family-Hospital)-31-01-2026.jpg", month: "Jan-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/9fXxXzPb/NOV-2025-2025-Prescription-Investigation-Order-Dr-Rubee-Khattar.jpg", month: "Nov-25", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/W4p9ptmS/NOV-2025-DEC-2025-Prescription-Treatment-Plan-Dr-Rubee-Khattar.jpg", month: "Nov-25", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/8Ckyksd9/NOV-2025-Double-Marker-Test-01-Nov-2025-Tata-1-Mg-page-0001.jpg", month: "Nov-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/DzfCfmd3/NOV-2025-Double-Marker-Test-01-Nov-2025-Tata-1-Mg-page-0002.jpg", month: "Nov-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/QMN6NVkr/NOV-2025-Double-Marker-Test-01-Nov-2025-Tata-1-Mg-page-0003.jpg", month: "Nov-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/W4p9ptmQ/OCT-2024-Clinical-Notes-(Sunray-Health-Point)-(Pre-conception-Early-Phase)-16-Oct-2024.jpg", month: "Oct-24", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/8CyZ7Dw3/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0001.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/3wLtk7nr/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0002.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/Xv2sr3Qy/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0003.jpg", month: "Oct-25", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/4dmBtMS9/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0004.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/26V2vJKy/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0005.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/TwpCmS4m/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0006.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/pTpq876B/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0007.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/W3CS7nBW/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0008.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/j5mvhXpM/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0009.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/1t2MKBxs/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0010.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/rm3g9j6T/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-I-page-0011.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/qqKwDK0T/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0001.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/3NG1fG73/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0002.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/SR9d19qY/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0003.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/NFXDCXYy/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0004.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/prjCcjxQ/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0005.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/bYSmw7n5/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0006.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/RCJgZkfv/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0007.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/ZKkVBwFY/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0008.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/c4qXgFM4/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0009.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/tC02ZBt1/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0010.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/m2x8zmNC/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0011.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/fTx5xYBY/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0012.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/kXrf6TFT/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0013.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/5Nwpw8nK/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0014.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/tChDhF28/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0015.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/CxS7JdQX/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0016.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/WbMSM05v/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0017.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/vZbhXDKy/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0018.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/YCMR8jPr/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0019.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/sgsmK1L5/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0020.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/8zN4wsY6/OCT-2025-29-OCT-2025-Tata-1-Mg-Test-Report-II-page-0021.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/MGZsZXbx/OCT-2025-Doctor-Visit-28-Oct-2025.jpg", month: "Oct-25", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/5tPsX1nc/OCT-2025-Doctor-Visit-31-Oct-2025.jpg", month: "Oct-25", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/fbH8VZ56/OCT-2025-Early-Ultrasound-Report-(Holy-Family-Hospital)-29-10-2025.jpg", month: "Oct-25", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/jStcvC1n/SEP-2025-Prescription-(Starcare-Medical-Center-UAE)-08-Sep-2025.jpg", month: "Sep-25", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/63DBKVXN/OCT-2025-Doctor-Visit-31-Oct-2025.jpg", month: "Oct-25", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/GtwnVcFs/SEP-2025-Prescription-(Starcare-Medical-Center-UAE)-08-Sep-2025.jpg", month: "Sep-25", category: "DOC VISIT" }
+    ];
+
+    // ------------------------------------------------------------
+    // helper: parse month for descending sort
+    // ------------------------------------------------------------
+    function monthToDate(monthStr) {
+        const [mmm, yy] = monthStr.split('-');
+        const months = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+        let year = 2000 + parseInt(yy, 10);
+        if (yy === '24') year = 2024;
+        if (yy === '25') year = 2025;
+        if (yy === '26') year = 2026;
+        return new Date(year, months[mmm], 1);
+    }
+
+    // ------------------------------------------------------------
+    // subcategory from filename (clean, no icons)
+    // ------------------------------------------------------------
+    function getSubcategory(url) {
+        const f = url.split('/').pop().toLowerCase();
+        if (f.includes('prescription')) return 'PRESCRIPTION';
+        if (f.includes('clinical note') || f.includes('clinical-notes')) return 'CLINICAL NOTE';
+        if (f.includes('clinical opd notes')) return 'OPD NOTE';
+        if (f.includes('progress notes')) return 'PROGRESS NOTE';
+        if (f.includes('doctor visit')) return 'DOCTOR VISIT';
+        if (f.includes('admission order')) return 'ADMISSION ORDER';
+        if (f.includes('ultrasound')) return 'ULTRASOUND';
+        if (f.includes('double marker')) return 'DOUBLE MARKER';
+        if (f.includes('npt test')) return 'NPT TEST';
+        if (f.includes('blood test')) return 'BLOOD TEST';
+        if (f.includes('urine test') || f.includes('urine culture')) return 'URINE TEST';
+        if (f.includes('glucose')) return 'GLUCOSE TEST';
+        if (f.includes('kft')) return 'KFT';
+        if (f.includes('cbc')) return 'CBC';
+        if (f.includes('test report')) return 'TEST REPORT';
+        return 'DOCUMENT';
+    }
+
+    // ------------------------------------------------------------
+    // group by category, month (desc), subcategory
+    // ------------------------------------------------------------
+    const doctorVisits = imageData.filter(d => d.category === 'DOC VISIT');
+    const testReports = imageData.filter(d => d.category === 'TEST REPORT');
+
+    function groupByMonthAndSubcat(arr) {
+        const groups = {};
+        arr.forEach(item => {
+            if (!groups[item.month]) groups[item.month] = {};
+            const sub = getSubcategory(item.url);
+            if (!groups[item.month][sub]) groups[item.month][sub] = [];
+            groups[item.month][sub].push(item);
+        });
+        return groups;
+    }
+
+    const doctorGroups = groupByMonthAndSubcat(doctorVisits);
+    const testGroups = groupByMonthAndSubcat(testReports);
+
+    const allMonthsSet = new Set([...Object.keys(doctorGroups), ...Object.keys(testGroups)]);
+    const sortedMonths = Array.from(allMonthsSet).sort((a,b) => monthToDate(b) - monthToDate(a));
+
+    // ------------------------------------------------------------
+    // render month block with subcategories
+    // ------------------------------------------------------------
+    function renderMonthBlock(month, subcatMap) {
+        let html = `<div class="month-block"><div class="month-header">${month}</div>`;
+        const subcats = Object.keys(subcatMap).sort();
+        subcats.forEach(sub => {
+            const items = subcatMap[sub];
+            html += `<div class="subcategory-title">${sub} (${items.length})</div>`;
+            html += `<div class="thumbnail-grid">`;
+            items.forEach(item => {
+                const short = item.url.split('/').pop().substring(0, 16) + '…';
+                html += `<div class="thumb-card" onclick="openModal('${item.url}')">
+                            <img class="thumb-image" src="${item.url}" alt="${sub}" loading="lazy" onerror="this.src='https://via.placeholder.com/150?text=error'">
+                            <div class="thumb-caption">${short}</div>
+                        </div>`;
+            });
+            html += `</div>`;
+        });
+        html += `</div>`;
+        return html;
+    }
+
+    function buildPanel(title, groups, monthsList) {
+        let panel = `<div class="panel"><div class="panel-title">${title}</div>`;
+        monthsList.forEach(month => {
+            if (groups[month]) {
+                panel += renderMonthBlock(month, groups[month]);
+            }
+        });
+        panel += '</div>';
+        return panel;
+    }
+
+    const container = document.getElementById('galleryContainer');
+    container.innerHTML = buildPanel('DOCTOR VISITS & PRESCRIPTIONS', doctorGroups, sortedMonths) +
+                          buildPanel('TEST REPORTS', testGroups, sortedMonths);
+
+    // ------------------------------------------------------------
+    // modal with zoom functionality
+    // ------------------------------------------------------------
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const zoomInBtn = document.getElementById('zoomInBtn');
+    const zoomOutBtn = document.getElementById('zoomOutBtn');
+    const zoomResetBtn = document.getElementById('zoomResetBtn');
+
+    let currentScale = 1;
+    const scaleStep = 0.3;
+    const maxScale = 3;
+    const minScale = 0.5;
+
+    function applyScale() {
+        modalImg.style.transform = `scale(${currentScale})`;
+    }
+
+    window.openModal = function(url) {
+        modal.style.display = 'flex';
+        modalImg.src = url;
+        currentScale = 1;
+        applyScale();
+    };
+
+    window.closeModal = function() {
+        modal.style.display = 'none';
+        modalImg.src = '';
+    };
+
+    window.closeModalOnClickOutside = function(event) {
+        if (event.target === modal) closeModal();
+    };
+
+    zoomInBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (currentScale < maxScale) {
+            currentScale = Math.min(maxScale, currentScale + scaleStep);
+            applyScale();
+        }
+    });
+
+    zoomOutBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (currentScale > minScale) {
+            currentScale = Math.max(minScale, currentScale - scaleStep);
+            applyScale();
+        }
+    });
+
+    zoomResetBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentScale = 1;
+        applyScale();
+    });
+
+    modalImg.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        currentScale = 1;
+        applyScale();
+    });
+
+    // ------------------------------------------------------------
+    // pregnancy date calculations (LMP 4 Aug 2025, 36w 20 Apr 2026)
+    // ------------------------------------------------------------
+    (function updateDates() {
+        const lmp = new Date(2025, 7, 4);
+        const target36 = new Date(2026, 3, 20);
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        lmp.setHours(0,0,0,0);
+        target36.setHours(0,0,0,0);
+
+        document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, { year:'numeric', month:'long', day:'numeric' });
+
+        const diffToTarget = target36 - today;
+        const daysRemaining = Math.ceil(diffToTarget / (86400000));
+        const daysElem = document.getElementById('daysRemaining');
+        const weeksSpan = document.getElementById('weeksRemaining');
+
+        if (daysRemaining > 0) {
+            daysElem.innerHTML = `${daysRemaining} <small>DAYS</small>`;
+            const w = Math.floor(daysRemaining/7);
+            const d = daysRemaining%7;
+            weeksSpan.innerText = `${w} WEEKS ${d} DAYS TO 36W`;
+        } else if (daysRemaining === 0) {
+            daysElem.innerHTML = '0 <small>DAYS</small>';
+            weeksSpan.innerText = '36 WEEKS EXACTLY';
+        } else {
+            daysElem.innerHTML = '—';
+            weeksSpan.innerText = 'AFTER 36 WEEKS';
+        }
+
+        const pregDays = Math.floor((today - lmp) / 86400000);
+        if (pregDays >= 0) {
+            const w = Math.floor(pregDays/7);
+            const d = pregDays%7;
+            document.getElementById('currentPregnancy').innerHTML = `${w} <small>WEEKS</small> ${d} <small>DAYS</small>`;
+        } else {
+            document.getElementById('currentPregnancy').innerHTML = '<small>0</small>';
+        }
+    })();
+</script>
+</body>
+</html>
