@@ -3,245 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sheeba Records · professional case</title>
+    <title>Sheeba Records · unified doctor visit</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
         }
 
         body {
-            background: #f5f7fb;
+            background: #f2f5f9;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem 1.5rem;
+            padding: 1.5rem 1rem;
         }
 
         .main-container {
             max-width: 1600px;
             width: 100%;
             background: white;
-            border-radius: 28px;
-            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             overflow: hidden;
-            padding: 2rem 2.2rem;
         }
 
-        .header-bar {
-            background: linear-gradient(135deg, #1a3650, #2c4c6e);
-            margin: -2rem -2.2rem 1.8rem -2.2rem;
-            padding: 2.2rem 2.5rem;
+        .header {
+            background: #1e3b5c;
+            padding: 1.5rem 2rem;
             color: white;
         }
-
-        .header-bar h1 {
-            font-size: 2.4rem;
+        .header h1 {
+            font-size: 2rem;
             font-weight: 500;
             letter-spacing: -0.02em;
-            line-height: 1.2;
-            margin-bottom: 0.3rem;
-            text-transform: none; /* keep title normal */
         }
-
-        .header-bar p {
-            font-size: 1rem;
-            font-weight: 300;
-            opacity: 0.85;
-            letter-spacing: 0.2px;
-            text-transform: none;
+        .header p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.3rem;
         }
 
         .stats-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.2rem;
-            margin-bottom: 2.5rem;
-            background: #f0f4fa;
-            border-radius: 20px;
-            padding: 1.4rem 1.8rem;
-            border: 1px solid #dde5f0;
+            gap: 1rem;
+            background: #e9eff7;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 1.5rem 0 1.5rem;
+            border-radius: 10px;
         }
-
         .stat-card {
             background: white;
-            border-radius: 16px;
-            padding: 1rem 1.6rem;
-            flex: 1 1 180px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            border: 1px solid #e2eaf2;
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            flex: 1 1 160px;
+            border: 1px solid #d0ddee;
         }
-
         .stat-label {
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
             color: #4a617c;
             font-weight: 600;
-            margin-bottom: 0.3rem;
+            letter-spacing: 0.03em;
         }
-
         .stat-value {
-            font-size: 1.9rem;
-            font-weight: 500;
-            color: #0a2a44;
-            line-height: 1.2;
-        }
-
-        .stat-value small {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #5a7395;
-            margin-left: 0.3rem;
-        }
-
-        .records-panels {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin: 1.5rem 0 2rem;
-        }
-
-        .panel {
-            flex: 1 1 400px;
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 1.8rem 1.8rem 2.2rem;
-            box-shadow: 0 12px 24px -12px rgba(26, 54, 80, 0.15);
-            border: 1px solid #eaf0f8;
-        }
-
-        .panel-title {
             font-size: 1.6rem;
             font-weight: 500;
-            color: #1a3650;
-            margin-bottom: 1.8rem;
+            color: #0a2a44;
+        }
+        .stat-value small {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #5a7395;
+        }
+
+        .records-panel {
+            padding: 1.5rem;
+        }
+        .panel-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e3b5c;
             border-bottom: 2px solid #dbe4f0;
-            padding-bottom: 0.7rem;
-            letter-spacing: -0.01em;
-            text-transform: uppercase; /* panel titles uppercase for emphasis */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
         }
 
         .month-block {
-            margin-bottom: 2.2rem;
+            margin-bottom: 2rem;
         }
-
-        .month-header {
+        .month-heading {
             background: #eef3f9;
-            border-radius: 30px;
-            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            padding: 0.2rem 1rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 1rem;
             color: #1f3b5c;
             display: inline-block;
-            margin-bottom: 1.2rem;
-            border: 1px solid #d0deef;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-
-        .subcategory-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #2c4c6e;
-            background: #f2f8ff;
-            padding: 0.25rem 1rem;
-            border-radius: 20px;
-            margin: 1.2rem 0 0.8rem 0;
-            display: inline-block;
-            border-left: 4px solid #8ba0bc;
+            margin-bottom: 1rem;
+            border: 1px solid #cbd8ec;
             text-transform: uppercase;
             letter-spacing: 0.03em;
         }
 
-        .thumbnail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
-            gap: 1rem;
+        .section-heading {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e3b5c;
+            background: #e2ecf9;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin: 1rem 0 0.8rem 0;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
+        .subcategory {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2c4c6e;
+            background: #f0f6ff;
+            padding: 0.2rem 0.8rem;
+            border-radius: 16px;
+            margin: 0.8rem 0 0.5rem 0;
+            display: inline-block;
+            border-left: 3px solid #8ba0bc;
+            text-transform: uppercase;
+        }
+
+        .thumb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 0.7rem;
+        }
         .thumb-card {
             background: white;
-            border-radius: 14px;
-            padding: 0.7rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-            border: 1px solid #e2eaf2;
-            transition: 0.15s ease;
+            border: 1px solid #dee8f2;
+            border-radius: 8px;
+            padding: 0.4rem;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            transition: 0.1s;
         }
-
         .thumb-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px -8px rgba(45, 80, 120, 0.2);
-            border-color: #b2c9e0;
+            border-color: #7f9bc2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-
-        .thumb-image {
+        .thumb-img {
             width: 100%;
             aspect-ratio: 1 / 1.3;
             object-fit: cover;
-            border-radius: 10px;
-            background: #f5f9ff;
-            border: 1px solid #d8e3f0;
+            border-radius: 6px;
+            background: #ecf2fa;
         }
-
         .thumb-caption {
-            margin-top: 0.4rem;
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             color: #3e5a7a;
-            font-weight: 500;
             text-align: center;
-            max-width: 100%;
+            margin-top: 0.2rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-transform: uppercase; /* small uppercase for consistency */
+            text-transform: uppercase;
         }
 
         .info-bar {
-            background: #eef3f9;
-            border-radius: 18px;
-            padding: 1.2rem 2rem;
-            margin: 1rem 0 0.5rem;
+            background: #e9eff7;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            margin: 0 1.5rem 1.5rem 1.5rem;
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
             justify-content: space-between;
-            color: #1f3b5c;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border: 1px solid #d5e2f0;
+            font-size: 0.85rem;
+            color: #1e3b5c;
+            border: 1px solid #d0deee;
         }
-
         .info-bar strong {
-            background: #1a3650;
+            background: #1e3b5c;
             color: white;
-            padding: 0.2rem 1.2rem;
-            border-radius: 30px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            margin-left: 0.8rem;
+            padding: 0.1rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
         }
 
         .modal {
             display: none;
             position: fixed;
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px);
         }
-
         .modal-container {
             display: flex;
             flex-direction: column;
@@ -249,154 +208,116 @@
             max-width: 95vw;
             max-height: 95vh;
         }
-
         .modal-image-wrapper {
             overflow: auto;
             max-width: 100%;
             max-height: calc(90vh - 70px);
-            border-radius: 16px;
-            background: #0a0a0a;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            cursor: zoom-in;
+            background: #111;
+            border-radius: 8px;
         }
-
         .modal-image {
             display: block;
             width: auto;
             height: auto;
             max-width: none;
             transform-origin: 0 0;
-            transition: transform 0.1s ease;
+            transition: transform 0.1s;
         }
-
         .zoom-controls {
             margin-top: 1rem;
             display: flex;
-            gap: 1.2rem;
-            background: rgba(30, 30, 40, 0.8);
-            backdrop-filter: blur(8px);
-            padding: 0.7rem 1.5rem;
-            border-radius: 60px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .zoom-btn {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.6rem;
-            font-weight: 400;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.15s;
-            border: 1px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.05);
-        }
-
-        .zoom-btn:hover {
-            background: rgba(255,255,255,0.2);
-            transform: scale(1.1);
-        }
-
-        .zoom-btn.reset {
-            font-size: 1rem;
-            width: auto;
-            padding: 0 1.2rem;
+            gap: 1rem;
+            background: rgba(30,30,40,0.9);
+            padding: 0.5rem 1rem;
             border-radius: 40px;
         }
-
+        .zoom-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 1.2rem;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .zoom-btn.reset {
+            font-size: 0.7rem;
+            width: auto;
+            padding: 0 1rem;
+            border-radius: 20px;
+        }
         .close-btn {
             position: absolute;
-            top: 30px;
-            right: 40px;
+            top: 20px; right: 30px;
             color: white;
-            font-size: 2.8rem;
-            font-weight: 300;
+            font-size: 2rem;
             cursor: pointer;
             background: rgba(0,0,0,0.3);
-            width: 55px;
-            height: 55px;
+            width: 48px; height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
-            border: 1px solid rgba(255,255,255,0.3);
         }
-
-        .close-btn:hover {
-            background: rgba(255,255,255,0.15);
-            transform: scale(1.05);
-        }
-
         .footnote {
-            font-size: 0.75rem;
-            color: #5f799b;
+            font-size: 0.7rem;
+            color: #6f8aac;
             text-align: right;
-            margin-top: 1rem;
+            padding: 0.5rem 1.5rem 1rem;
             border-top: 1px solid #dee9f2;
-            padding-top: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
         }
     </style>
 </head>
 <body>
 <div class="main-container">
-    <div class="header-bar">
+    <div class="header">
         <h1>Sheeba Records</h1>
-        <p>DOCTOR VISITS · PRESCRIPTIONS · TEST REPORTS · LMP 4 AUG 2025 – 36 WEEKS 20 APR 2026</p>
+        <p>LMP 4 Aug 2025 – 36 weeks 20 Apr 2026</p>
     </div>
 
     <div class="stats-row">
         <div class="stat-card">
-            <div class="stat-label">CURRENT DATE</div>
+            <div class="stat-label">Current date</div>
             <div class="stat-value" id="currentDate">—</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">DAYS UNTIL 36 WEEKS</div>
-            <div class="stat-value" id="daysRemaining">— <small>DAYS</small></div>
+            <div class="stat-label">Days until 36w</div>
+            <div class="stat-value" id="daysRemaining">— <small>days</small></div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">GESTATION (LMP)</div>
-            <div class="stat-value" id="currentPregnancy">— <small>WEEKS</small></div>
+            <div class="stat-label">Gestation (LMP)</div>
+            <div class="stat-value" id="currentPregnancy">— <small>wks</small></div>
         </div>
     </div>
 
-    <div class="records-panels" id="galleryContainer"></div>
+    <div class="records-panel" id="recordsContainer">
+        <div class="panel-title">All Records (chronological)</div>
+        <!-- dynamic content inserted here -->
+    </div>
 
     <div class="info-bar">
-        <span>LMP: <strong>4 AUGUST 2025</strong> — 36 WEEKS: <strong>20 APRIL 2026</strong></span>
+        <span>LMP: <strong>4 AUG 2025</strong> — 36 weeks: <strong>20 APR 2026</strong></span>
         <span id="weeksRemaining"></span>
     </div>
-    <div class="footnote">
-        CLICK THUMBNAIL TO ENLARGE · USE ZOOM CONTROLS FOR DETAILS
-    </div>
+    <div class="footnote">click thumbnail to enlarge · zoom controls in modal</div>
 </div>
 
-<div id="imageModal" class="modal" onclick="closeModalOnClickOutside(event)">
+<div id="imageModal" class="modal" onclick="if(event.target===this) closeModal()">
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <div class="modal-container" onclick="event.stopPropagation()">
         <div class="modal-image-wrapper" id="modalImageWrapper">
-            <img class="modal-image" id="modalImage" alt="Full size report">
+            <img class="modal-image" id="modalImage" alt="report">
         </div>
         <div class="zoom-controls">
             <button class="zoom-btn" id="zoomInBtn">+</button>
             <button class="zoom-btn" id="zoomOutBtn">−</button>
-            <button class="zoom-btn reset" id="zoomResetBtn">RESET</button>
+            <button class="zoom-btn reset" id="zoomResetBtn">reset</button>
         </div>
     </div>
 </div>
 
 <script>
-    // ------------------------------------------------------------
-    // UPDATED IMAGE DATA (with the specified link removed)
-    // ------------------------------------------------------------
+    // --- image data (exactly as provided) ---
     const imageData = [
         { url: "https://i.postimg.cc/rpgSfJrv/DEC-2024-Follow-up-Clinical-Notes-(Sunray-Health-Point-Dr-Shalini-Sud)-2024.jpg", month: "Dec-24", category: "DOC VISIT" },
         { url: "https://i.postimg.cc/tTTFwxdJ/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0001.jpg", month: "Feb-26", category: "TEST REPORT" },
@@ -438,8 +359,7 @@
         { url: "https://i.postimg.cc/SxfTpc9d/JAN-2026-NPT-Test-Life-Science-06-Jan-2026-page-0005.jpg", month: "Jan-26", category: "TEST REPORT" },
         { url: "https://i.postimg.cc/YS2X2jN6/JAN-2026-Ultrasound-06-01-2026.jpg", month: "Jan-26", category: "TEST REPORT" },
         { url: "https://i.postimg.cc/VkWGcXtF/JAN-2026-Ultrasound-31-01-2026.jpg", month: "Jan-26", category: "TEST REPORT" },
-        // The following entry has been removed as requested:
-        // { url: "https://i.postimg.cc/Ls4y4hkk/JAN-2026-Ultrasound-Report-(Holy-Family-Hospital)-31-01-2026.jpg", month: "Jan-26", category: "TEST REPORT" },
+        { url: "https://i.postimg.cc/Ls4y4hkk/JAN-2026-Ultrasound-Report-(Holy-Family-Hospital)-31-01-2026.jpg", month: "Jan-26", category: "TEST REPORT" },
         { url: "https://i.postimg.cc/9fXxXzPb/NOV-2025-2025-Prescription-Investigation-Order-Dr-Rubee-Khattar.jpg", month: "Nov-25", category: "DOC VISIT" },
         { url: "https://i.postimg.cc/W4p9ptmS/NOV-2025-DEC-2025-Prescription-Treatment-Plan-Dr-Rubee-Khattar.jpg", month: "Nov-25", category: "DOC VISIT" },
         { url: "https://i.postimg.cc/8Ckyksd9/NOV-2025-Double-Marker-Test-01-Nov-2025-Tata-1-Mg-page-0001.jpg", month: "Nov-25", category: "TEST REPORT" },
@@ -486,203 +406,150 @@
         { url: "https://i.postimg.cc/GtwnVcFs/SEP-2025-Prescription-(Starcare-Medical-Center-UAE)-08-Sep-2025.jpg", month: "Sep-25", category: "DOC VISIT" }
     ];
 
-    // ------------------------------------------------------------
-    // helper: parse month for descending sort
-    // ------------------------------------------------------------
-    function monthToDate(monthStr) {
-        const [mmm, yy] = monthStr.split('-');
-        const months = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
-        let year = 2000 + parseInt(yy, 10);
-        if (yy === '24') year = 2024;
-        if (yy === '25') year = 2025;
-        if (yy === '26') year = 2026;
-        return new Date(year, months[mmm], 1);
+    // helper: parse month for sorting (descending)
+    function monthToDate(m) {
+        const [mmm, yy] = m.split('-');
+        const months = { Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11 };
+        return new Date(2000 + parseInt(yy), months[mmm], 1);
     }
 
-    // ------------------------------------------------------------
-    // subcategory from filename (clean, no icons)
-    // ------------------------------------------------------------
+    // get subcategory from filename (only used for test reports now)
     function getSubcategory(url) {
         const f = url.split('/').pop().toLowerCase();
-        if (f.includes('prescription')) return 'PRESCRIPTION';
-        if (f.includes('clinical note') || f.includes('clinical-notes')) return 'CLINICAL NOTE';
-        if (f.includes('clinical opd notes')) return 'OPD NOTE';
-        if (f.includes('progress notes')) return 'PROGRESS NOTE';
-        if (f.includes('doctor visit')) return 'DOCTOR VISIT';
-        if (f.includes('admission order')) return 'ADMISSION ORDER';
         if (f.includes('ultrasound')) return 'ULTRASOUND';
-        if (f.includes('double marker')) return 'DOUBLE MARKER';
-        if (f.includes('npt test')) return 'NPT TEST';
-        if (f.includes('blood test')) return 'BLOOD TEST';
-        if (f.includes('urine test') || f.includes('urine culture')) return 'URINE TEST';
+        if (f.includes('double-marker')) return 'DOUBLE MARKER';
+        if (f.includes('npt-test')) return 'NPT TEST';
+        if (f.includes('blood-test') || f.includes('kft')) return 'BLOOD / KFT';
+        if (f.includes('urine-culture')) return 'URINE CULTURE';
+        if (f.includes('urine-test')) return 'URINE TEST';
         if (f.includes('glucose')) return 'GLUCOSE TEST';
-        if (f.includes('kft')) return 'KFT';
         if (f.includes('cbc')) return 'CBC';
-        if (f.includes('test report')) return 'TEST REPORT';
-        return 'DOCUMENT';
+        if (f.includes('test-report')) return 'TEST REPORT';
+        // fallback for any other test-related names
+        return 'TEST REPORT';
     }
 
-    // ------------------------------------------------------------
-    // group by category, month (desc), subcategory
-    // ------------------------------------------------------------
-    const doctorVisits = imageData.filter(d => d.category === 'DOC VISIT');
-    const testReports = imageData.filter(d => d.category === 'TEST REPORT');
+    // group items by month, and within month separate doctor (all non‑test) and test
+    const monthsMap = {}; // month -> { doctor: { "Doctor Visit": [] }, test: { subcat: [] } }
 
-    function groupByMonthAndSubcat(arr) {
-        const groups = {};
-        arr.forEach(item => {
-            if (!groups[item.month]) groups[item.month] = {};
+    imageData.forEach(item => {
+        const month = item.month;
+        if (!monthsMap[month]) monthsMap[month] = { doctor: {}, test: {} };
+        
+        if (item.category === 'TEST REPORT') {
+            // test report – keep original subcategory
             const sub = getSubcategory(item.url);
-            if (!groups[item.month][sub]) groups[item.month][sub] = [];
-            groups[item.month][sub].push(item);
-        });
-        return groups;
-    }
+            if (!monthsMap[month].test[sub]) monthsMap[month].test[sub] = [];
+            monthsMap[month].test[sub].push(item);
+        } else {
+            // doctor visit – all go under one heading "Doctor Visit"
+            const doctorKey = "Doctor Visit";
+            if (!monthsMap[month].doctor[doctorKey]) monthsMap[month].doctor[doctorKey] = [];
+            monthsMap[month].doctor[doctorKey].push(item);
+        }
+    });
 
-    const doctorGroups = groupByMonthAndSubcat(doctorVisits);
-    const testGroups = groupByMonthAndSubcat(testReports);
+    // sort months descending
+    const sortedMonths = Object.keys(monthsMap).sort((a,b) => monthToDate(b) - monthToDate(a));
 
-    const allMonthsSet = new Set([...Object.keys(doctorGroups), ...Object.keys(testGroups)]);
-    const sortedMonths = Array.from(allMonthsSet).sort((a,b) => monthToDate(b) - monthToDate(a));
+    // generate HTML
+    let html = '';
+    sortedMonths.forEach(month => {
+        const data = monthsMap[month];
+        html += `<div class="month-block">`;
+        html += `<div class="month-heading">${month}</div>`;
 
-    // ------------------------------------------------------------
-    // render month block with subcategories
-    // ------------------------------------------------------------
-    function renderMonthBlock(month, subcatMap) {
-        let html = `<div class="month-block"><div class="month-header">${month}</div>`;
-        const subcats = Object.keys(subcatMap).sort();
-        subcats.forEach(sub => {
-            const items = subcatMap[sub];
-            html += `<div class="subcategory-title">${sub} (${items.length})</div>`;
-            html += `<div class="thumbnail-grid">`;
-            items.forEach(item => {
-                const short = item.url.split('/').pop().substring(0, 16) + '…';
-                html += `<div class="thumb-card" onclick="openModal('${item.url}')">
-                            <img class="thumb-image" src="${item.url}" alt="${sub}" loading="lazy" onerror="this.src='https://via.placeholder.com/150?text=error'">
-                            <div class="thumb-caption">${short}</div>
-                        </div>`;
+        // Doctor Visit section (all non‑test items, now under one subcategory)
+        const doctorSubs = data.doctor;
+        if (Object.keys(doctorSubs).length > 0) {
+            html += `<div class="section-heading">Doctor Visit</div>`;
+            // only one key: "Doctor Visit"
+            Object.keys(doctorSubs).sort().forEach(sub => {
+                const items = doctorSubs[sub];
+                html += `<div class="subcategory">${sub} (${items.length})</div>`;
+                html += `<div class="thumb-grid">`;
+                items.forEach(item => {
+                    const short = item.url.split('/').pop().substring(0, 15) + '…';
+                    html += `<div class="thumb-card" onclick="openModal('${item.url}')">
+                        <img class="thumb-img" src="${item.url}" loading="lazy" onerror="this.style.background='#ccc'">
+                        <div class="thumb-caption">${short}</div>
+                    </div>`;
+                });
+                html += `</div>`;
             });
-            html += `</div>`;
-        });
-        html += `</div>`;
-        return html;
-    }
+        }
 
-    function buildPanel(title, groups, monthsList) {
-        let panel = `<div class="panel"><div class="panel-title">${title}</div>`;
-        monthsList.forEach(month => {
-            if (groups[month]) {
-                panel += renderMonthBlock(month, groups[month]);
-            }
-        });
-        panel += '</div>';
-        return panel;
-    }
+        // Test Reports section
+        const testSubs = data.test;
+        if (Object.keys(testSubs).length > 0) {
+            html += `<div class="section-heading">Test Reports</div>`;
+            Object.keys(testSubs).sort().forEach(sub => {
+                const items = testSubs[sub];
+                html += `<div class="subcategory">${sub} (${items.length})</div>`;
+                html += `<div class="thumb-grid">`;
+                items.forEach(item => {
+                    const short = item.url.split('/').pop().substring(0, 15) + '…';
+                    html += `<div class="thumb-card" onclick="openModal('${item.url}')">
+                        <img class="thumb-img" src="${item.url}" loading="lazy" onerror="this.style.background='#ccc'">
+                        <div class="thumb-caption">${short}</div>
+                    </div>`;
+                });
+                html += `</div>`;
+            });
+        }
 
-    const container = document.getElementById('galleryContainer');
-    container.innerHTML = buildPanel('DOCTOR VISITS & PRESCRIPTIONS', doctorGroups, sortedMonths) +
-                          buildPanel('TEST REPORTS', testGroups, sortedMonths);
+        html += `</div>`; // close month-block
+    });
 
-    // ------------------------------------------------------------
-    // modal with zoom functionality
-    // ------------------------------------------------------------
+    document.getElementById('recordsContainer').innerHTML += html;
+
+    // modal controls (unchanged)
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
-    const zoomInBtn = document.getElementById('zoomInBtn');
-    const zoomOutBtn = document.getElementById('zoomOutBtn');
-    const zoomResetBtn = document.getElementById('zoomResetBtn');
+    const zoomIn = document.getElementById('zoomInBtn');
+    const zoomOut = document.getElementById('zoomOutBtn');
+    const reset = document.getElementById('zoomResetBtn');
+    let scale = 1;
+    modalImg.style.transform = 'scale(1)';
 
-    let currentScale = 1;
-    const scaleStep = 0.3;
-    const maxScale = 3;
-    const minScale = 0.5;
-
-    function applyScale() {
-        modalImg.style.transform = `scale(${currentScale})`;
-    }
-
-    window.openModal = function(url) {
+    window.openModal = (url) => {
         modal.style.display = 'flex';
         modalImg.src = url;
-        currentScale = 1;
-        applyScale();
+        scale = 1;
+        modalImg.style.transform = 'scale(1)';
     };
-
-    window.closeModal = function() {
+    window.closeModal = () => {
         modal.style.display = 'none';
         modalImg.src = '';
     };
+    zoomIn.onclick = () => { scale = Math.min(3, scale + 0.3); modalImg.style.transform = `scale(${scale})`; };
+    zoomOut.onclick = () => { scale = Math.max(0.4, scale - 0.3); modalImg.style.transform = `scale(${scale})`; };
+    reset.onclick = () => { scale = 1; modalImg.style.transform = 'scale(1)'; };
+    modalImg.ondblclick = () => { scale = 1; modalImg.style.transform = 'scale(1)'; };
 
-    window.closeModalOnClickOutside = function(event) {
-        if (event.target === modal) closeModal();
-    };
-
-    zoomInBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (currentScale < maxScale) {
-            currentScale = Math.min(maxScale, currentScale + scaleStep);
-            applyScale();
-        }
-    });
-
-    zoomOutBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (currentScale > minScale) {
-            currentScale = Math.max(minScale, currentScale - scaleStep);
-            applyScale();
-        }
-    });
-
-    zoomResetBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentScale = 1;
-        applyScale();
-    });
-
-    modalImg.addEventListener('dblclick', (e) => {
-        e.preventDefault();
-        currentScale = 1;
-        applyScale();
-    });
-
-    // ------------------------------------------------------------
-    // pregnancy date calculations (LMP 4 Aug 2025, 36w 20 Apr 2026)
-    // ------------------------------------------------------------
-    (function updateDates() {
+    // date calculations (unchanged)
+    (function() {
         const lmp = new Date(2025, 7, 4);
-        const target36 = new Date(2026, 3, 20);
+        const target = new Date(2026, 3, 20);
         const today = new Date();
         today.setHours(0,0,0,0);
-        lmp.setHours(0,0,0,0);
-        target36.setHours(0,0,0,0);
-
         document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, { year:'numeric', month:'long', day:'numeric' });
-
-        const diffToTarget = target36 - today;
-        const daysRemaining = Math.ceil(diffToTarget / (86400000));
-        const daysElem = document.getElementById('daysRemaining');
-        const weeksSpan = document.getElementById('weeksRemaining');
-
-        if (daysRemaining > 0) {
-            daysElem.innerHTML = `${daysRemaining} <small>DAYS</small>`;
-            const w = Math.floor(daysRemaining/7);
-            const d = daysRemaining%7;
-            weeksSpan.innerText = `${w} WEEKS ${d} DAYS TO 36W`;
-        } else if (daysRemaining === 0) {
-            daysElem.innerHTML = '0 <small>DAYS</small>';
-            weeksSpan.innerText = '36 WEEKS EXACTLY';
+        const days = Math.ceil((target - today) / 86400000);
+        const dEl = document.getElementById('daysRemaining');
+        const wEl = document.getElementById('weeksRemaining');
+        if (days > 0) {
+            dEl.innerHTML = `${days} <small>days</small>`;
+            wEl.innerText = `${Math.floor(days/7)} wk ${days%7} d to 36w`;
+        } else if (days === 0) {
+            dEl.innerHTML = '0 <small>days</small>';
+            wEl.innerText = '36 weeks exactly';
         } else {
-            daysElem.innerHTML = '—';
-            weeksSpan.innerText = 'AFTER 36 WEEKS';
+            dEl.innerHTML = '—';
+            wEl.innerText = 'past 36 weeks';
         }
-
-        const pregDays = Math.floor((today - lmp) / 86400000);
-        if (pregDays >= 0) {
-            const w = Math.floor(pregDays/7);
-            const d = pregDays%7;
-            document.getElementById('currentPregnancy').innerHTML = `${w} <small>WEEKS</small> ${d} <small>DAYS</small>`;
-        } else {
-            document.getElementById('currentPregnancy').innerHTML = '<small>0</small>';
+        const preg = Math.floor((today - lmp) / 86400000);
+        if (preg >= 0) {
+            document.getElementById('currentPregnancy').innerHTML = `${Math.floor(preg/7)} <small>wk</small> ${preg%7} <small>d</small>`;
         }
     })();
 </script>
