@@ -151,7 +151,7 @@
             padding: 0.4rem;
             cursor: pointer;
             transition: 0.1s;
-            -webkit-tap-highlight-color: transparent; /* remove mobile tap highlight */
+            -webkit-tap-highlight-color: transparent;
         }
         .thumb-card:hover {
             border-color: #7f9bc2;
@@ -403,7 +403,6 @@
             }
         }
 
-        /* improve touch targets */
         .thumb-card, .zoom-btn, .close-btn {
             touch-action: manipulation;
         }
@@ -458,8 +457,9 @@
 </div>
 
 <script>
-    // --- image data (exactly as provided) ---
+    // --- image data (exactly as provided, with new March 2026 entries) ---
     const imageData = [
+        // existing entries ...
         { url: "https://i.postimg.cc/rpgSfJrv/DEC-2024-Follow-up-Clinical-Notes-(Sunray-Health-Point-Dr-Shalini-Sud)-2024.jpg", month: "Dec-24", category: "DOC VISIT" },
         { url: "https://i.postimg.cc/tTTFwxdJ/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0001.jpg", month: "Feb-26", category: "TEST REPORT" },
         { url: "https://i.postimg.cc/hjjV6d8D/FEB-2026-Blood-test-Urine-Test-KFT-21-Feb-2026-Tata-1-Mg-page-0002.jpg", month: "Feb-26", category: "TEST REPORT" },
@@ -544,7 +544,11 @@
         { url: "https://i.postimg.cc/fbH8VZ56/OCT-2025-Early-Ultrasound-Report-(Holy-Family-Hospital)-29-10-2025.jpg", month: "Oct-25", category: "TEST REPORT" },
         { url: "https://i.postimg.cc/jStcvC1n/SEP-2025-Prescription-(Starcare-Medical-Center-UAE)-08-Sep-2025.jpg", month: "Sep-25", category: "DOC VISIT" },
         { url: "https://i.postimg.cc/63DBKVXN/OCT-2025-Doctor-Visit-31-Oct-2025.jpg", month: "Oct-25", category: "DOC VISIT" },
-        { url: "https://i.postimg.cc/GtwnVcFs/SEP-2025-Prescription-(Starcare-Medical-Center-UAE)-08-Sep-2025.jpg", month: "Sep-25", category: "DOC VISIT" }
+        { url: "https://i.postimg.cc/GtwnVcFs/SEP-2025-Prescription-(Starcare-Medical-Center-UAE)-08-Sep-2025.jpg", month: "Sep-25", category: "DOC VISIT" },
+        // 🆕 NEW MARCH 2026 DISCHARGE DOCUMENTS (added as DOC VISIT)
+        { url: "https://i.postimg.cc/nc8r2CCj/Whats-App-Image-2026-03-03-at-20-01-33.jpg", month: "Mar-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/wTKM2777/Whats-App-Image-2026-03-03-at-20-01-33-(1).jpg", month: "Mar-26", category: "DOC VISIT" },
+        { url: "https://i.postimg.cc/bNXrgssq/Whats-App-Image-2026-03-03-at-20-01-34.jpg", month: "Mar-26", category: "DOC VISIT" }
     ];
 
     // helper: parse month for sorting (descending)
@@ -566,7 +570,6 @@
         if (f.includes('glucose')) return 'GLUCOSE TEST';
         if (f.includes('cbc')) return 'CBC';
         if (f.includes('test-report')) return 'TEST REPORT';
-        // fallback for any other test-related names
         return 'TEST REPORT';
     }
 
@@ -578,12 +581,10 @@
         if (!monthsMap[month]) monthsMap[month] = { doctor: {}, test: {} };
         
         if (item.category === 'TEST REPORT') {
-            // test report – keep original subcategory
             const sub = getSubcategory(item.url);
             if (!monthsMap[month].test[sub]) monthsMap[month].test[sub] = [];
             monthsMap[month].test[sub].push(item);
         } else {
-            // doctor visit – all go under one heading "Doctor Visit"
             const doctorKey = "Doctor Visit";
             if (!monthsMap[month].doctor[doctorKey]) monthsMap[month].doctor[doctorKey] = [];
             monthsMap[month].doctor[doctorKey].push(item);
@@ -600,11 +601,9 @@
         html += `<div class="month-block">`;
         html += `<div class="month-heading">${month}</div>`;
 
-        // Doctor Visit section (all non‑test items, now under one subcategory)
         const doctorSubs = data.doctor;
         if (Object.keys(doctorSubs).length > 0) {
             html += `<div class="section-heading">Doctor Visit</div>`;
-            // only one key: "Doctor Visit"
             Object.keys(doctorSubs).sort().forEach(sub => {
                 const items = doctorSubs[sub];
                 html += `<div class="subcategory">${sub} (${items.length})</div>`;
@@ -620,7 +619,6 @@
             });
         }
 
-        // Test Reports section
         const testSubs = data.test;
         if (Object.keys(testSubs).length > 0) {
             html += `<div class="section-heading">Test Reports</div>`;
@@ -639,7 +637,7 @@
             });
         }
 
-        html += `</div>`; // close month-block
+        html += `</div>`;
     });
 
     document.getElementById('recordsContainer').innerHTML += html;
